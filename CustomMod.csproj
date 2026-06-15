@@ -1,0 +1,45 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.1</TargetFramework>
+    <LangVersion>10.0</LangVersion>
+    <AssemblyName>CustomMod</AssemblyName>
+    <RootNamespace>CustomMod</RootNamespace>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <COI_ROOT Condition="'$(COI_ROOT)' == ''">$(COI_ROOT)</COI_ROOT>
+    <COI_MANAGED>$(COI_ROOT)\Captain of Industry_Data\Managed</COI_MANAGED>
+    <COI_MODS>$(APPDATA)\Captain of Industry\Mods</COI_MODS>
+    <DeployToModsFolder>true</DeployToModsFolder>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Reference Include="Mafi">
+      <HintPath>$(COI_MANAGED)\Mafi.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+    <Reference Include="Mafi.Core">
+      <HintPath>$(COI_MANAGED)\Mafi.Core.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+    <Reference Include="Mafi.Base">
+      <HintPath>$(COI_MANAGED)\Mafi.Base.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+    <Reference Include="Mafi.Unity">
+      <HintPath>$(COI_MANAGED)\Mafi.Unity.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+  </ItemGroup>
+
+  <Target Name="DeployMod" AfterTargets="Build" Condition="'$(DeployToModsFolder)' == 'true'">
+    <PropertyGroup>
+      <ModDeployDir>$(COI_MODS)\CustomMod</ModDeployDir>
+    </PropertyGroup>
+    <MakeDir Directories="$(ModDeployDir)" />
+    <Copy SourceFiles="$(TargetPath)" DestinationFolder="$(ModDeployDir)" />
+    <Copy SourceFiles="$(ProjectDir)manifest.json" DestinationFolder="$(ModDeployDir)" Condition="Exists('$(ProjectDir)manifest.json')" />
+  </Target>
+
+</Project>

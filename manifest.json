@@ -1,0 +1,9 @@
+{
+  "id": "FbrSteamMod",
+  "version": "0.1.0",
+  "dlls": ["FbrSteamMod.dll"],
+  "name": "FBR Steam Boost",
+  "description": "Quadruples FBR water consumption and SP steam output. Reduces computing requirement to 4 TFlops.",
+  "author": "Daniel",
+  "minGameVersion": "0.8.0"
+}
