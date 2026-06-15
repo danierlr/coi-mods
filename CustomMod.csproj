@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>net48</TargetFramework>
@@ -13,6 +13,12 @@
     <COI_MODS>$(APPDATA)\Captain of Industry\Mods</COI_MODS>
     <DeployToModsFolder>true</DeployToModsFolder>
   </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="decompiled\**" />
+    <EmbeddedResource Remove="decompiled\**" />
+    <None Remove="decompiled\**" />
+  </ItemGroup>
 
   <ItemGroup>
     <Reference Include="Mafi">
