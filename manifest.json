@@ -2,8 +2,10 @@
   "id": "CustomMod",
   "version": "0.1.0",
   "primary_dlls": ["CustomMod.dll"],
-  "name": "Custom Mod",
-  "description": "Collection of independent gameplay tweaks.",
-  "author": "Daniel",
-  "minGameVersion": "0.8.0"
+  "display_name": "Custom Mod",
+  "description_short": "Collection of independent gameplay tweaks.",
+  "authors": ["Daniel"],
+  "min_game_version": "0.8.0",
+  "can_add_to_saved_game": true,
+  "can_remove_from_saved_game": true
 }

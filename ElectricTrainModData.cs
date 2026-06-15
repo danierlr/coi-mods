@@ -1,5 +1,6 @@
 using System.Reflection;
 using Mafi;
+using Mafi.Core.Entities;
 using Mafi.Core.Mods;
 using Mafi.Core.Prototypes;
 using Mafi.Core.Trains;
@@ -25,7 +26,8 @@ namespace CustomMod
                 frontalAreaM2: 7,
                 lengthDragExtra: 1.5,
                 dragStandalone: 3,
-                dragInline: 2);
+                dragInline: 2,
+                costMultiplier: 1.5);
 
             ModifyElectricLoco(db, IdsTrainsDlc.LocomotiveT2Electric,
                 enginePowerKw: 3350,
@@ -39,7 +41,8 @@ namespace CustomMod
                 frontalAreaM2: 5,
                 lengthDragExtra: 1.5,
                 dragStandalone: 3,
-                dragInline: 2);
+                dragInline: 2,
+                costMultiplier: 2.5);
         }
 
         private static void ModifyElectricLoco(ProtosDb db, Proto.ID id,
@@ -48,7 +51,8 @@ namespace CustomMod
             int? massEmpty = null, int? massFull = null,
             int? rollingResistCoeff = null, int? frontalAreaM2 = null,
             double? lengthDragExtra = null,
-            int? dragStandalone = null, int? dragInline = null)
+            int? dragStandalone = null, int? dragInline = null,
+            double? costMultiplier = null)
         {
             var loco = db.GetOrThrow<ElectricLocomotiveProto>(id);
 
@@ -84,6 +88,16 @@ namespace CustomMod
 
             if (dragInline.HasValue)
                 SetField<TrainCarBaseProto>(loco, "DragCoefficientInline", (Fix32)dragInline.Value);
+
+            if (costMultiplier.HasValue)
+            {
+                var costs = loco.Costs;
+                var percent = Percent.FromRatio((Fix32)costMultiplier.Value, Fix32.One);
+                var scaledConstruction = costs.BaseConstructionCost.ScaledBy(percent);
+                var newCosts = new EntityCosts(scaledConstruction, costs.DefaultPriority, costs.Workers, costs.Maintenance);
+                SetField<EntityProto>(loco, "<Costs>k__BackingField", newCosts);
+                Mafi.Log.Info($"CustomMod: {id} construction cost multiplied by {costMultiplier.Value}x");
+            }
 
             Mafi.Log.Info($"CustomMod: {id} modified — Power:{enginePowerKw}kW TE:{tractiveEffortKn}kN Elec:{powerRequiredKw}kW");
         }
