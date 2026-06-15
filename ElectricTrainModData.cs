@@ -21,11 +21,13 @@ namespace CustomMod
                 enginePowerKw: 870, tractiveEffortKn: 209, powerRequiredKw: 1000);
 
             ModifyElectricLoco(db, IdsTrainsDlc.LocomotiveT2Electric,
-                enginePowerKw: 2800, tractiveEffortKn: 700, powerRequiredKw: 2850);
+                enginePowerKw: 2850, tractiveEffortKn: 900, powerRequiredKw: 2900,
+                maxSpeedKmh: 150);
         }
 
         private static void ModifyElectricLoco(ProtosDb db, Proto.ID id,
-            int enginePowerKw, int tractiveEffortKn, int powerRequiredKw)
+            int enginePowerKw, int tractiveEffortKn, int powerRequiredKw,
+            int? maxSpeedKmh = null)
         {
             var loco = db.GetOrThrow<ElectricLocomotiveProto>(id);
 
@@ -56,6 +58,16 @@ namespace CustomMod
                 {
                     powerField.SetValue(loco, powerRequiredKw.Kw());
                     Mafi.Log.Info($"CustomMod: {id} PowerRequired set to {powerRequiredKw} (via backing field)");
+                }
+            }
+
+            if (maxSpeedKmh.HasValue)
+            {
+                var maxSpeedField = typeof(TrainCarBaseProto).GetField("MaxSpeed", FLAGS);
+                if (maxSpeedField != null)
+                {
+                    maxSpeedField.SetValue(loco, maxSpeedKmh.Value.Kmh());
+                    Mafi.Log.Info($"CustomMod: {id} MaxSpeed set to {maxSpeedKmh.Value} km/h");
                 }
             }
         }
