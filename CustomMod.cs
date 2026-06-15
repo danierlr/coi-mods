@@ -23,6 +23,7 @@ namespace CustomMod
         public void RegisterPrototypes(ProtoRegistrator registrator)
         {
             registrator.RegisterData<FbrSteamModData>();
+            registrator.RegisterData<ElectricTrainModData>();
         }
 
         public void RegisterDependencies(DependencyResolverBuilder depBuilder, ProtosDb protosDb, bool gameWasLoaded)

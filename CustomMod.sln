@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 18
+VisualStudioVersion = 18.6.11828.311 oobstable
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CustomMod", "CustomMod.csproj", "{64635D80-4BC0-C83B-C979-82982097456B}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{64635D80-4BC0-C83B-C979-82982097456B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{64635D80-4BC0-C83B-C979-82982097456B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{64635D80-4BC0-C83B-C979-82982097456B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{64635D80-4BC0-C83B-C979-82982097456B}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {D7AA8724-360B-4782-8146-37B5D7775E46}
+	EndGlobalSection
+EndGlobal
