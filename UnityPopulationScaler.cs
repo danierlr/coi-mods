@@ -13,6 +13,7 @@ namespace CustomMod
     {
         private readonly SettlementsManager m_settlementsManager;
         private readonly IProperty<Percent> m_unityMultProp;
+        private readonly ICalendar m_calendar;
 
         private static readonly Action<object, BlobWriter> s_serializeDataDelayedAction;
         private static readonly Action<object, BlobReader> s_deserializeDataDelayedAction;
@@ -24,7 +25,8 @@ namespace CustomMod
         {
             m_settlementsManager = settlementsManager;
             m_unityMultProp = propsDb.GetProperty(IdsCore.PropertyIds.UnityProductionMultiplier);
-            calendar.NewMonthStart.Add(this, UpdateUnityMultiplier);
+            m_calendar = calendar;
+            m_calendar.NewMonthStart.Add(this, UpdateUnityMultiplier);
             UpdateUnityMultiplier();
         }
 
@@ -50,6 +52,7 @@ namespace CustomMod
         {
             writer.WriteGeneric(m_settlementsManager);
             writer.WriteGeneric(m_unityMultProp);
+            writer.WriteGeneric(m_calendar);
         }
 
         public static UnityPopulationScaler Deserialize(BlobReader reader)
@@ -68,6 +71,9 @@ namespace CustomMod
         {
             reader.SetField(this, "m_settlementsManager", reader.ReadGenericAs<SettlementsManager>());
             reader.SetField(this, "m_unityMultProp", reader.ReadGenericAs<IProperty<Percent>>());
+            reader.SetField(this, "m_calendar", reader.ReadGenericAs<ICalendar>());
+            m_calendar.NewMonthStart.Add(this, UpdateUnityMultiplier);
+            UpdateUnityMultiplier();
         }
 
         static UnityPopulationScaler()
