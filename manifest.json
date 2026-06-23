@@ -1,7 +1,8 @@
 {
   "id": "CustomMod",
   "version": "0.1.0",
-  "primary_dlls": ["CustomMod.dll"],
+  "primary_dlls": ["0Harmony.dll", "CustomMod.dll"],
+  "primary_mod_class_name": "CustomMod.CustomMod",
   "display_name": "Custom Mod",
   "description_short": "Collection of independent gameplay tweaks.",
   "authors": ["Daniel"],

@@ -20,6 +20,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="Lib.Harmony" Version="2.3.3" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Reference Include="Mafi">
       <HintPath>$(COI_ROOT)\Captain of Industry_Data\Managed\Mafi.dll</HintPath>
       <Private>false</Private>
@@ -53,6 +57,7 @@
     <MakeDir Directories="$(ModDeployDir)" />
     <Copy SourceFiles="$(TargetPath)" DestinationFolder="$(ModDeployDir)" />
     <Copy SourceFiles="$(ProjectDir)manifest.json" DestinationFolder="$(ModDeployDir)" Condition="Exists('$(ProjectDir)manifest.json')" />
+    <Copy SourceFiles="$(OutputPath)0Harmony.dll" DestinationFolder="$(ModDeployDir)" Condition="Exists('$(OutputPath)0Harmony.dll')" />
   </Target>
 
 </Project>
