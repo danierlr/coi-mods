@@ -68,6 +68,8 @@ namespace CustomMod
             registrator.RegisterData<ElectricTrainModData>();
             registrator.RegisterData<WagonCapacityModData>();
             registrator.RegisterData<RemoveRadiationModData>();
+            registrator.RegisterData<ExcavatorModData>();
+            registrator.RegisterData<TruckModData>();
         }
 
         public void RegisterDependencies(DependencyResolverBuilder depBuilder, ProtosDb protosDb, bool gameWasLoaded)
